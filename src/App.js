@@ -57,12 +57,20 @@ const App = (props) => {
         update_name('from buton')
     }
 
+    const style={
+        backgroundColor:'white',
+        font:'inherit',
+        border:'1px solid blue',
+        padding:'8px',
+        cursor:'pointer',
+        margin:'auto'
+    }
     return (
 
-        <div>
-            <div className='class'></div>
+        <div className='App'>
 
-            <button onClick={() => {
+
+            <button style={style} onClick={() => {
                 on_btn_click('from button');
             }}>click me
             </button>

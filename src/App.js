@@ -51,6 +51,8 @@ const App = (props) => {
         'c'
     ])
 
+    const [show_persons_state, show_persons_state_update] = useState(false)
+
     const update_user_name = (event) => {
         usernameStateUpdate([
             event.target.value,
@@ -79,6 +81,41 @@ const App = (props) => {
         cursor: 'pointer',
         margin: 'auto'
     }
+
+    const toggle_persons = () => {
+        show_persons_state_update(!show_persons_state);
+    }
+
+    let persons_2 = null;
+    if (show_persons_state) {
+        persons_2 = <div>
+            <Person
+                name={personsState.persons[0].name}
+                age={personsState.persons[0].age}
+                person_click={on_person_click.bind(this, 'from person')}
+                input_change={on_name_change}
+            >
+
+                <mark>hello ya all</mark>
+            </Person>
+            {/*<br/>*/}
+
+            <Person
+                name={personsState.persons[1].name}
+                age={personsState.persons[1].age}>
+                <mark>hello ya all</mark>
+            </Person>
+
+            {/*<br/>*/}
+
+            <Person
+                name={personsState.persons[2].name}
+                age={personsState.persons[2].age}>
+                <mark>hello ya all</mark>
+            </Person>
+
+        </div>;
+    }
     return (
 
         <div className='App'>
@@ -88,36 +125,37 @@ const App = (props) => {
                 on_btn_click('from button');
             }}>click me
             </button>
-
+            <button onClick={toggle_persons}>show/hide persons</button>
             {/*<button onClick={update_name.bind(this,'from buton')}>click me</button>*/}
 
-          <div>
-              <Person
-                  name={personsState.persons[0].name}
-                  age={personsState.persons[0].age}
-                  person_click={on_person_click.bind(this, 'from person')}
-                  input_change={on_name_change}
-              >
+            {show_persons_state && <div>
+                <Person
+                    name={personsState.persons[0].name}
+                    age={personsState.persons[0].age}
+                    person_click={on_person_click.bind(this, 'from person')}
+                    input_change={on_name_change}
+                >
 
-                  <mark>hello ya all</mark>
-              </Person>
-              {/*<br/>*/}
+                    <mark>hello ya all</mark>
+                </Person>
+                {/*<br/>*/}
 
-              <Person
-                  name={personsState.persons[1].name}
-                  age={personsState.persons[1].age}>
-                  <mark>hello ya all</mark>
-              </Person>
+                <Person
+                    name={personsState.persons[1].name}
+                    age={personsState.persons[1].age}>
+                    <mark>hello ya all</mark>
+                </Person>
 
-              {/*<br/>*/}
+                {/*<br/>*/}
 
-              <Person
-                  name={personsState.persons[2].name}
-                  age={personsState.persons[2].age}>
-                  <mark>hello ya all</mark>
-              </Person>
-
-          </div>
+                <Person
+                    name={personsState.persons[2].name}
+                    age={personsState.persons[2].age}>
+                    <mark>hello ya all</mark>
+                </Person>
+                <h4>persons_2</h4>
+                {persons_2}
+            </div>}
             {/*<br/>*/}
             <br/>
             <UserInput name={usernameState[0]} on_user_name_change={update_user_name}></UserInput>

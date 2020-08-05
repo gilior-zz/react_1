@@ -2,9 +2,10 @@ import React from 'react'
 import   './Person.css'
 const person = (props) => {
     return (
-        <div className="Person">
+        <div onClick={props.on_person_click} className="Person">
 
-            <p onClick={props.person_click}>
+            {/*<p onClick={props.person_click}>*/}
+            <p>
                 im a person!
 
             my name is {props.name}  {" "}

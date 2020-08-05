@@ -51,7 +51,7 @@ const App = (props) => {
         'c'
     ])
 
-    const [show_persons_state, show_persons_state_update] = useState(false)
+    const [show_persons_state, show_persons_state_update] = useState(true)
 
     const update_user_name = (event) => {
         usernameStateUpdate([
@@ -65,8 +65,12 @@ const App = (props) => {
         update_name(new_name)
     }
 
-    const on_name_change = (event) => {
-        update_name(`from input: ${event.target.value}`)
+    const on_name_change = (event,index) => {
+        const clone_arr=[...personsState.persons];
+        const clone_per=clone_arr[index];
+        clone_per.name= ` ${event.target.value}`;
+        setPersonsState({persons:clone_arr })
+        // update_name(`from input: ${event.target.value}`)
     }
 
     const on_btn_click = () => {
@@ -87,34 +91,40 @@ const App = (props) => {
     }
 
     let persons_2 = null;
-    if (show_persons_state) {
-        persons_2 = <div>
-            <Person
-                name={personsState.persons[0].name}
-                age={personsState.persons[0].age}
-                person_click={on_person_click.bind(this, 'from person')}
-                input_change={on_name_change}
-            >
-
-                <mark>hello ya all</mark>
-            </Person>
-            {/*<br/>*/}
-
-            <Person
-                name={personsState.persons[1].name}
-                age={personsState.persons[1].age}>
-                <mark>hello ya all</mark>
-            </Person>
-
-            {/*<br/>*/}
-
-            <Person
-                name={personsState.persons[2].name}
-                age={personsState.persons[2].age}>
-                <mark>hello ya all</mark>
-            </Person>
-
-        </div>;
+    // if (show_persons_state) {
+    //
+    //     persons_2 = <div>
+    //         <Person
+    //             name={personsState.persons[0].name}
+    //             age={personsState.persons[0].age}
+    //             person_click={on_person_click.bind(this, 'from person')}
+    //             input_change={on_name_change}
+    //         >
+    //
+    //             <mark>hello ya all</mark>
+    //         </Person>
+    //         {/*<br/>*/}
+    //
+    //         <Person
+    //             name={personsState.persons[1].name}
+    //             age={personsState.persons[1].age}>
+    //             <mark>hello ya all</mark>
+    //         </Person>
+    //
+    //         {/*<br/>*/}
+    //
+    //         <Person
+    //             name={personsState.persons[2].name}
+    //             age={personsState.persons[2].age}>
+    //             <mark>hello ya all</mark>
+    //         </Person>
+    //
+    //     </div>;
+    // }
+    const remove_person = (index) => {
+        console.log(index)
+        let filtered_persons = [...personsState.persons].splice(index,1);
+        // setPersonsState({persons: filtered_persons})
     }
     return (
 
@@ -128,34 +138,45 @@ const App = (props) => {
             <button onClick={toggle_persons}>show/hide persons</button>
             {/*<button onClick={update_name.bind(this,'from buton')}>click me</button>*/}
 
-            {show_persons_state && <div>
-                <Person
-                    name={personsState.persons[0].name}
-                    age={personsState.persons[0].age}
-                    person_click={on_person_click.bind(this, 'from person')}
-                    input_change={on_name_change}
-                >
+            {/*{show_persons_state && <div>*/}
+            {/*    <Person*/}
+            {/*        name={personsState.persons[0].name}*/}
+            {/*        age={personsState.persons[0].age}*/}
+            {/*        person_click={on_person_click.bind(this, 'from person')}*/}
+            {/*        input_change={on_name_change}*/}
+            {/*    >*/}
 
-                    <mark>hello ya all</mark>
-                </Person>
-                {/*<br/>*/}
+            {/*        <mark>hello ya all</mark>*/}
+            {/*    </Person>*/}
+            {/*    /!*<br/>*!/*/}
 
-                <Person
-                    name={personsState.persons[1].name}
-                    age={personsState.persons[1].age}>
-                    <mark>hello ya all</mark>
-                </Person>
+            {/*    <Person*/}
+            {/*        name={personsState.persons[1].name}*/}
+            {/*        age={personsState.persons[1].age}>*/}
+            {/*        <mark>hello ya all</mark>*/}
+            {/*    </Person>*/}
 
-                {/*<br/>*/}
+            {/*    /!*<br/>*!/*/}
 
-                <Person
-                    name={personsState.persons[2].name}
-                    age={personsState.persons[2].age}>
-                    <mark>hello ya all</mark>
-                </Person>
-                <h4>persons_2</h4>
-                {persons_2}
-            </div>}
+            {/*    <Person*/}
+            {/*        name={personsState.persons[2].name}*/}
+            {/*        age={personsState.persons[2].age}>*/}
+            {/*        <mark>hello ya all</mark>*/}
+            {/*    </Person>*/}
+            {/*    <h4>persons_2_refactor</h4>*/}
+            {/*    {persons_2}*/}
+            {/*    <h4>persons_3_iteration</h4>*/}
+                {personsState.persons.map((item,index) =>
+                    <Person
+                        key={item.age}
+                        on_person_click={()=>{remove_person(index)}}
+                        name={item.name}
+                        age={item.age}
+                        input_change={(event)=>{on_name_change(event,index)}}>
+                        <mark>hello ya all</mark>
+                    </Person>
+                )}
+            {/*</div>}*/}
             {/*<br/>*/}
             <br/>
             <UserInput name={usernameState[0]} on_user_name_change={update_user_name}></UserInput>

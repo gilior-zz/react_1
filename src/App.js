@@ -3,6 +3,8 @@ import './App.css';
 import Person from "./Person/Person";
 import UserOutput from "./task_1/UserOutput";
 import UserInput from "./task_1/UserInput";
+import Validation from "./Validation/Validation";
+import Char from "./Char/Char";
 
 
 // class App extends Component {
@@ -65,11 +67,11 @@ const App = (props) => {
         update_name(new_name)
     }
 
-    const on_name_change = (event,index) => {
-        const clone_arr=[...personsState.persons];
-        const clone_per=clone_arr[index];
-        clone_per.name= ` ${event.target.value}`;
-        setPersonsState({persons:clone_arr })
+    const on_name_change = (event, index) => {
+        const clone_arr = [...personsState.persons];
+        const clone_per = clone_arr[index];
+        clone_per.name = ` ${event.target.value}`;
+        setPersonsState({persons: clone_arr})
         // update_name(`from input: ${event.target.value}`)
     }
 
@@ -123,8 +125,20 @@ const App = (props) => {
     // }
     const remove_person = (index) => {
         console.log(index)
-        let filtered_persons = [...personsState.persons].splice(index,1);
+        let filtered_persons = [...personsState.persons].splice(index, 1);
         // setPersonsState({persons: filtered_persons})
+    }
+
+    const [char_state, char_state_update] = useState('')
+
+    const update_char_state = (event) => {
+        char_state_update(event.target.value)
+    }
+
+    const remove_char = (index) => {
+        let clone = char_state;
+        let new_str = clone.split('').splice(index, 1);
+        char_state_update(new_str);
     }
     return (
 
@@ -166,16 +180,20 @@ const App = (props) => {
             {/*    <h4>persons_2_refactor</h4>*/}
             {/*    {persons_2}*/}
             {/*    <h4>persons_3_iteration</h4>*/}
-                {personsState.persons.map((item,index) =>
-                    <Person
-                        key={item.age}
-                        on_person_click={()=>{remove_person(index)}}
-                        name={item.name}
-                        age={item.age}
-                        input_change={(event)=>{on_name_change(event,index)}}>
-                        <mark>hello ya all</mark>
-                    </Person>
-                )}
+            {personsState.persons.map((item, index) =>
+                <Person
+                    key={item.age}
+                    on_person_click={() => {
+                        remove_person(index)
+                    }}
+                    name={item.name}
+                    age={item.age}
+                    input_change={(event) => {
+                        on_name_change(event, index)
+                    }}>
+                    <mark>hello ya all</mark>
+                </Person>
+            )}
             {/*</div>}*/}
             {/*<br/>*/}
             <br/>
@@ -183,8 +201,16 @@ const App = (props) => {
             <UserOutput name={usernameState[0]}></UserOutput>
             <UserOutput name={usernameState[1]}></UserOutput>
             <UserOutput name={usernameState[2]}></UserOutput>
-
-
+            <h2>task_list_cond</h2>
+            <input onChange={update_char_state} value={char_state} type="text"/>
+            <Validation txt_length={char_state.length}></Validation>
+            {
+                char_state.split('').map((char, index) =>
+                    <Char on_click={(index) => {
+                        remove_char(index)
+                    }} char_obj={{char, index}}></Char>
+                )
+            }
         </div>
     )
     // }

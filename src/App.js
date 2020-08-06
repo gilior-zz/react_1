@@ -136,8 +136,10 @@ const App = (props) => {
     }
 
     const remove_char = (index) => {
-        let clone = char_state;
-        let new_str = clone.split('').splice(index, 1);
+        let splited = char_state.split('')
+        splited.splice(index, 1);
+        let new_str = splited.join('');
+        console.log(new_str)
         char_state_update(new_str);
     }
     return (

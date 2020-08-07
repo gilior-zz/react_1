@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
+import classes_css from './App.module.css';
 import Person from "./Person/Person";
 import UserOutput from "./task_1/UserOutput";
 import UserInput from "./task_1/UserInput";
@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 // class App extends Component {
 const StyledButton = styled.button`
-  background-color: ${(props)=>true?'green':'red'};
+  background-color: ${(props) => true ? 'green' : 'red'};
         font: inherit;
         border: 1px solid blue;
         padding: 8px;
@@ -41,6 +41,7 @@ const App = (props) => {
             ]
         })
     }
+
     const [personsState, setPersonsState] = useState({
         persons: [
             {
@@ -92,18 +93,18 @@ const App = (props) => {
         update_name('from buton')
     }
 
-    // const style = {
-    //     backgroundColor: 'white',
-    //     font: 'inherit',
-    //     border: '1px solid blue',
-    //     padding: '8px',
-    //     cursor: 'pointer',
-    //     margin: 'auto',
-    //     ':hover': {
-    //         backgroundColor: 'lightgreen',
-    //         color: 'black'
-    //     }
-    // }
+    const style = {
+        backgroundColor: 'white',
+        font: 'inherit',
+        border: '1px solid blue',
+        padding: '8px',
+        cursor: 'pointer',
+        margin: 'auto',
+        ':hover': {
+            backgroundColor: 'lightgreen',
+            color: 'black'
+        }
+    }
 
     const toggle_persons = () => {
         show_persons_state_update(!show_persons_state);
@@ -174,16 +175,23 @@ const App = (props) => {
     }
     return (
         <StyleRoot>
-            <div className={'App'}>
-                <div className={[classes.join('')]}>
+            <div className={classes_css.App}>
+                <div className={[classes.join(' ')]}>
                     color depends on items length
                 </div>
 
-                <StyledButton onClick={() => {
+                {/*<StyledButton onClick={() => {*/}
+                {/*    on_btn_click('from button');*/}
+                {/*}}>click me*/}
+                {/*</StyledButton>*/}
+                {/*<button style={style} onClick={() => {*/}
+                {/*    on_btn_click('from button');*/}
+                {/*}}>click me*/}
+                {/*</button>*/}
+                <button className={classes_css.Button} onClick={() => {
                     on_btn_click('from button');
                 }}>click me
-                </StyledButton>
-                {/*<button style={style} onClick={() => {                    on_btn_click('from button');                }}>click me                </button>*/}
+                </button>
                 <button onClick={toggle_persons}>show/hide persons</button>
                 {/*<button onClick={update_name.bind(this,'from buton')}>click me</button>*/}
 
@@ -246,6 +254,7 @@ const App = (props) => {
                         }} char_obj={{char, index}}></Char>
                     )
                 }
+
             </div>
         </StyleRoot>
 

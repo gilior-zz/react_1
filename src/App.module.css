@@ -39,8 +39,29 @@
 
 .red{
   color: red;
+  /*background: red;*/
 }
 .blue{
   color: blue;
+}
+
+.Button.Red{
+  color: red;
+}
+
+.Button{
+  background-color: lightgreen;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  margin: auto;
+/*&:hover{*/
+/*   background-color: lightgreen;*/
+/*   color: black*/
+/* }*/
+}
+.Button:hover{
+  background: green;
 }
 

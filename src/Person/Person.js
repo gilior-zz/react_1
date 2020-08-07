@@ -21,6 +21,7 @@ const person = (props) => {
         }
 
     }
+
     return (
         // <div onClick={props.on_person_click} className="Person" style={style}>
 

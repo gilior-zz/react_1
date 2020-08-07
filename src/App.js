@@ -7,6 +7,7 @@ import Validation from "./Validation/Validation";
 import Char from "./Char/Char";
 import Radium, {StyleRoot} from "radium";
 import styled from 'styled-components'
+import Error_Boundary from "./Error_Boundary/Error_Boundary";
 
 // class App extends Component {
 const StyledButton = styled.button`
@@ -174,6 +175,7 @@ const App = (props) => {
         classes.push('red');
     }
     return (
+
         <StyleRoot>
             <div className={classes_css.App}>
                 <div className={[classes.join(' ')]}>
@@ -224,18 +226,20 @@ const App = (props) => {
                 {/*    {persons_2}*/}
                 {/*    <h4>persons_3_iteration</h4>*/}
                 {personsState.persons.map((item, index) =>
-                    <Person
-                        key={item.age}
-                        on_person_click={() => {
-                            remove_person(index)
-                        }}
-                        name={item.name}
-                        age={item.age}
-                        input_change={(event) => {
-                            on_name_change(event, index)
-                        }}>
-                        <mark>hello ya all</mark>
-                    </Person>
+                    <Error_Boundary key={item.age}>
+                        <Person
+
+                            on_person_click={() => {
+                                remove_person(index)
+                            }}
+                            name={item.name}
+                            age={item.age}
+                            input_change={(event) => {
+                                on_name_change(event, index+5)
+                            }}>
+                            <mark>hello ya all</mark>
+                        </Person>
+                    </Error_Boundary>
                 )}
                 {/*</div>}*/}
                 {/*<br/>*/}

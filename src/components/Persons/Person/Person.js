@@ -26,7 +26,7 @@ const person = (props) => {
         // <div onClick={props.on_person_click} className="Person" style={style}>
 
         // <p onClick={props.person_click}>
-        <StyledDiv>
+        <StyledDiv onClick={props.on_person_click}>
             <p>
                 im a person!
 

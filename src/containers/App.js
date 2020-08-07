@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import classes_css from './App.module.css';
-import Person from "./Person/Person";
-import UserOutput from "./task_1/UserOutput";
-import UserInput from "./task_1/UserInput";
-import Validation from "./Validation/Validation";
-import Char from "./Char/Char";
+import Person from "../components/Persons/Person/Person";
+import UserOutput from "../components/task_1/UserOutput";
+import UserInput from "../components/task_1/UserInput";
+import Validation from "../components/Validation/Validation";
+import Char from "../components/Char/Char";
 import Radium, {StyleRoot} from "radium";
 import styled from 'styled-components'
-import Error_Boundary from "./Error_Boundary/Error_Boundary";
+import Error_Boundary from "../components/Error_Boundary/Error_Boundary";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 // class App extends Component {
 const StyledButton = styled.button`
@@ -59,6 +61,7 @@ const App = (props) => {
             },
         ]
     })
+
 
     const [other_state, other_state_update] = useState('other_state')
 
@@ -177,7 +180,9 @@ const App = (props) => {
     return (
 
         <StyleRoot>
+
             <div className={classes_css.App}>
+                <h1>{props.title}</h1>
                 <div className={[classes.join(' ')]}>
                     color depends on items length
                 </div>
@@ -194,7 +199,7 @@ const App = (props) => {
                     on_btn_click('from button');
                 }}>click me
                 </button>
-                <button onClick={toggle_persons}>show/hide persons</button>
+
                 {/*<button onClick={update_name.bind(this,'from buton')}>click me</button>*/}
 
                 {/*{show_persons_state && <div>*/}
@@ -225,39 +230,22 @@ const App = (props) => {
                 {/*    <h4>persons_2_refactor</h4>*/}
                 {/*    {persons_2}*/}
                 {/*    <h4>persons_3_iteration</h4>*/}
-                {personsState.persons.map((item, index) =>
-                    <Error_Boundary key={item.age}>
-                        <Person
+                <button onClick={toggle_persons}>show/hide persons</button>
 
-                            on_person_click={() => {
-                                remove_person(index)
-                            }}
-                            name={item.name}
-                            age={item.age}
-                            input_change={(event) => {
-                                on_name_change(event, index+5)
-                            }}>
-                            <mark>hello ya all</mark>
-                        </Person>
-                    </Error_Boundary>
-                )}
+                {show_persons_state ?
+                    <Persons toggle_persons={toggle_persons}
+                                               on_name_change={(event, index) => on_name_change(event, index)}
+                                               on_remove_person={(index) => remove_person(index)}
+                                               persons={personsState.persons}></Persons> : null}
+
+                <Cockpit update_user_name={update_user_name} on_update_char_state={update_char_state} chars={char_state}
+                         on_remove_char={(index) => {
+                             remove_char(index)
+                         }} usernames={usernameState}></Cockpit>
                 {/*</div>}*/}
                 {/*<br/>*/}
                 <br/>
-                <UserInput name={usernameState[0]} on_user_name_change={update_user_name}></UserInput>
-                <UserOutput name={usernameState[0]}></UserOutput>
-                <UserOutput name={usernameState[1]}></UserOutput>
-                <UserOutput name={usernameState[2]}></UserOutput>
-                <h2>task_list_cond</h2>
-                <input onChange={update_char_state} value={char_state} type="text"/>
-                <Validation txt_length={char_state.length}></Validation>
-                {
-                    char_state.split('').map((char, index) =>
-                        <Char on_click={(index) => {
-                            remove_char(index)
-                        }} char_obj={{char, index}}></Char>
-                    )
-                }
+
 
             </div>
         </StyleRoot>

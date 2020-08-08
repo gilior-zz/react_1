@@ -11,7 +11,9 @@ class Persons_Class extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons_Class] shouldComponentUpdate');
-        return true;
+        // return nextProps.age!==this.props.age;
+      return true;
+        
     }
 
     componentDidUpdate() {

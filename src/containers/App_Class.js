@@ -17,7 +17,8 @@ class App_Class extends Component {
         usernameState: [
             'a',
             'b',
-            'c']
+            'c'],
+        show_cockpit: true
     }
 
     constructor(props) {
@@ -128,18 +129,17 @@ class App_Class extends Component {
                 </button>
 
                 <button onClick={this.toggle_persons}>show/hide persons</button>
-                {
-                    this.state.show_persons ?
-                        <Persons_Class toggle_persons={this.toggle_persons}
-                            on_name_change={(event, index) => this.on_name_change(event, index)}
-                            on_remove_person={(index) => this.remove_person(index)}
-                            persons={this.state.persons}></Persons_Class> : null}
-
-                <Cockpit update_user_name={this.update_user_name} on_update_char_state={this.update_char_state}
-                    chars={this.state.char_state}
-                    on_remove_char={(index) => {
-                        this.remove_char(index)
-                    }} usernames={this.state.usernameState}></Cockpit>
+                <button onClick={() => { this.setState({ show_cockpit: !this.state.show_cockpit }) }}>show/hide cockpit</button>
+              
+                {this.state.show_cockpit ?
+                    <Cockpit persons={this.state.persons} show_persons={this.state.show_persons} toggle_persons={this.toggle_persons} 
+                    on_name_change={this.on_name_change}
+                    on_remove_person={this.remove_person}
+                     update_user_name={this.update_user_name} on_update_char_state={this.update_char_state}
+                        chars={this.state.char_state}
+                        on_remove_char={(index) => {
+                            this.remove_char(index)
+                        }} usernames={this.state.usernameState}></Cockpit> : null}
             </div>
         )
         // if (this.)

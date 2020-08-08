@@ -1,10 +1,13 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import UserInput from "../task_1/UserInput";
 import UserOutput from "../task_1/UserOutput";
 import Validation from "../Validation/Validation";
 import Char from "../Char/Char";
 
 const Cockpit = (props) =>
+useEffect(()=>{
+    
+})
     (
         <div>
 

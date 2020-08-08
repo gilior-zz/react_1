@@ -37,7 +37,7 @@ const person = (props) => {
                 <br/>
                 change my name:
 
-                <input value={props.name} onChange={props.input_change} type="text"/>
+                <input onClick={(e)=>{e.stopPropagation()}} value={props.name} onChange={props.input_change} type="text"/>
                 <br/>
                 {props.children}
             </p>

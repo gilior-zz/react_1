@@ -158,6 +158,8 @@ const App = (props) => {
         char_state_update(event.target.value)
     }
 
+
+
     const remove_char = (index) => {
         let splited = char_state.split('')
         splited.splice(index, 1);

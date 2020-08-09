@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import UserInput from "../task_1/UserInput";
 import UserOutput from "../task_1/UserOutput";
 import Validation from "../Validation/Validation";
 import Char from "../Char/Char";
 import Persons_Class from '../Persons/Persons_Class'
 const Cockpit = (props) => {
-
+    const btn_hi_ref = useRef(null);
     useEffect(() => {
+        btn_hi_ref.current.click();
+
         const timer = setTimeout(() => {
             console.log('[Cockpit.js] feched  data');
         }, 1000);
@@ -21,9 +23,10 @@ const Cockpit = (props) => {
     }, []
     )
 
-
+    const hi_frm_btn = () => console.log('hi from button')
     return (
         <div>
+            <button ref={btn_hi_ref} onClick={() => console.log('hi from button')}> hi from button</button>
             {
                 props.show_persons ?
                     <Persons_Class toggle_persons={props.toggle_persons}

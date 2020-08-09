@@ -40,4 +40,5 @@ class Person_Class extends Component{
     }
 }
 
-export default Person_Class
+// export default Person_Class
+export default Hoc_Wrapped(Person_Class,classes_css.Person)

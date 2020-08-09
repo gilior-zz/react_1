@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import Hoc_Wrapped from "../../../hoc/Wrapped";
-import  classes_css from "./App.module.css";
-'./Person.css'
+// import  classes_css from "./Person.module.css";
+
 const StyledDiv = styled.div`
   width: 60%;
     margin:16px auto;

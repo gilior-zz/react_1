@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import './Person.css'
+// import './Person.css'
 import Radium from "radium";
 import styled from 'styled-components'
 import Aux from '../../../hoc/Auxilary';

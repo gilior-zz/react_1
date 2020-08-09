@@ -18,7 +18,8 @@ class App_Class extends Component {
             'a',
             'b',
             'c'],
-        show_cockpit: true
+        show_cockpit: true,
+        click_number: 0
     }
 
     constructor(props) {
@@ -63,8 +64,12 @@ class App_Class extends Component {
         const clone_per = clone_arr[index];
         clone_per.name = ` ${event.target.value}`;
         // this.state.persons = clone_arr;
-        this.setState({ persons: clone_arr })
+        // this.setState({ persons: clone_arr,click_number: this.state.click_number+1 })
+        this.setState((prevState, props) => {
+            return { persons: clone_arr, click_number: prevState.click_number + 1 }
+        })
         // update_name(`from input: ${event.target.value}`)
+
     }
 
     componentWillUnmount() {

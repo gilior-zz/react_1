@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './Person.css'
 import Radium from "radium";
 import styled from 'styled-components'
+import Aux from '../../../hoc/Auxilary';
 
 const StyledDiv = styled.div`
   width: 60%;
@@ -26,22 +27,28 @@ const person = (props) => {
         // <div onClick={props.on_person_click} className="Person" style={style}>
 
         // <p onClick={props.person_click}>
-        <StyledDiv onClick={props.on_person_click}>
-            <p>
-                im a person!
+        <Fragment>
+            <Aux>
+                <StyledDiv onClick={props.on_person_click}>
+                    <p>
+                        im a person!
 
                 my name is {props.name} {" "}
 
 
                 my age is {props.age}
-                <br/>
+                        <br />
                 change my name:
 
-                <input onClick={(e)=>{e.stopPropagation()}} value={props.name} onChange={props.input_change} type="text"/>
-                <br/>
-                {props.children}
-            </p>
-        </StyledDiv>
+                <input onClick={(e) => { e.stopPropagation() }} value={props.name} onChange={props.input_change} type="text" />
+                        <br />
+                        {props.children}
+                    </p>
+                </StyledDiv></Aux>
+        </Fragment>
+
+
+
     )
 
 }

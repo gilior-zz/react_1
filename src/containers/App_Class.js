@@ -4,7 +4,7 @@ import { StyleRoot } from "radium";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 import Persons_Class from "../components/Persons/Persons_Class";
-
+import With_Class from '../hoc/With_Class'
 class App_Class extends Component {
     state = {
         show_persons: true,
@@ -118,7 +118,7 @@ class App_Class extends Component {
         }
         console.log('render')
         return (
-            <div className={classes_css.App}>
+            <With_Class className={classes_css.App}>
                 <h1>{this.props.title}</h1>
                 <div className={[classes.join(' ')]}>
                     color depends on items length
@@ -130,17 +130,18 @@ class App_Class extends Component {
 
                 <button onClick={this.toggle_persons}>show/hide persons</button>
                 <button onClick={() => { this.setState({ show_cockpit: !this.state.show_cockpit }) }}>show/hide cockpit</button>
-              
+
                 {this.state.show_cockpit ?
-                    <Cockpit persons={this.state.persons} show_persons={this.state.show_persons} toggle_persons={this.toggle_persons} 
-                    on_name_change={this.on_name_change}
-                    on_remove_person={this.remove_person}
-                     update_user_name={this.update_user_name} on_update_char_state={this.update_char_state}
+                    <Cockpit persons={this.state.persons} show_persons={this.state.show_persons} toggle_persons={this.toggle_persons}
+                        on_name_change={this.on_name_change}
+                        on_remove_person={this.remove_person}
+                        update_user_name={this.update_user_name} on_update_char_state={this.update_char_state}
                         chars={this.state.char_state}
                         on_remove_char={(index) => {
                             this.remove_char(index)
                         }} usernames={this.state.usernameState}></Cockpit> : null}
-            </div>
+            </With_Class>
+
         )
         // if (this.)
 

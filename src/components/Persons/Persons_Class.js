@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component, PureComponent } from "react";
 import Person from "./Person/Person";
 import Person_Class from "./Person/Person_class";
 
-class Persons_Class extends Component {
+class Persons_Class extends PureComponent {
 
     // static getDerivedStateFromProps(props, state) {
     //     console.log('[Persons_Class] getDerivedStateFromProps');
@@ -11,13 +11,15 @@ class Persons_Class extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons_Class] shouldComponentUpdate');
-        // return nextProps.age!==this.props.age;
-      return true;
-        
+        // return nextProps.age!==this.props.age 
+        // || nextProps.input_change!==this.input_change 
+        // || nextProps.on_person_click!==this.on_person_click;
+        return true;
+
     }
 
     componentDidUpdate() {
-        
+
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -35,30 +37,30 @@ class Persons_Class extends Component {
     }
 
     render() {
-        return (
-            <div>
-                {this.props.persons.map((item, index) => {
-                        console.log('rendering persons');
+        // return (
+        //     <div>
+        return this.props.persons.map((item, index) => {
+            console.log('rendering persons');
 
-                        return (
-                            <Person_Class key={index}
+            return (
+                <Person_Class key={index}
 
-                                          on_person_click={() => {
-                                              this.props.on_remove_person(index)
-                                          }}
-                                          name={item.name}
-                                          age={item.age}
-                                          input_change={(event) => {
+                    on_person_click={() => {
+                        this.props.on_remove_person(index)
+                    }}
+                    name={item.name}
+                    age={item.age}
+                    input_change={(event) => {
 
-                                              this.props.on_name_change(event, index)
-                                          }}>
-                                <mark>hello ya all</mark>
-                            </Person_Class>
-                        )
-                    }
-                )}
-            </div>
+                        this.props.on_name_change(event, index)
+                    }}>
+                    <mark>hello ya all</mark>
+                </Person_Class>
+            )
+        }
         )
+        {/* </div>
+        ) */}
     }
 }
 

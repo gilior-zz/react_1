@@ -9,7 +9,7 @@ class App_Class extends Component {
     state = {
         show_persons: true,
         persons: [
-            { id: 1, name: 'a', age: 1 },
+            { id: 1, name: 'a', age: "1" },
             { id: 2, name: 'b', age: 2 },
             { id: 3, name: 'c', age: 3 },
         ],

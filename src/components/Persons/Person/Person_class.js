@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import Hoc_Wrapped from "../../../hoc/Wrapped";
+import { PropTypes } from 'prop-types'
 // import  classes_css from "./Person.module.css";
 
 const StyledDiv = styled.div`
@@ -15,7 +16,7 @@ const StyledDiv = styled.div`
         }
 `
 
-class Person_Class extends Component{
+class Person_Class extends Component {
     render() {
         return (
             <div>
@@ -27,11 +28,11 @@ class Person_Class extends Component{
 
 
                         my age is {this.props.age}
-                        <br/>
+                        <br />
                         change my name:
 
-                        <input onClick={(e)=>{e.stopPropagation()}} value={this.props.name} onChange={this.props.input_change} type="text"/>
-                        <br/>
+                        <input onClick={(e) => { e.stopPropagation() }} value={this.props.name} onChange={this.props.input_change} type="text" />
+                        <br />
                         {this.props.children}
                     </p>
                 </StyledDiv>
@@ -39,5 +40,10 @@ class Person_Class extends Component{
         )
     }
 }
-
+Person_Class.propTypes = {
+click:PropTypes.func,
+name:PropTypes.string,
+age:PropTypes.number,
+changed:PropTypes.func
+}
 export default Person_Class

@@ -17,9 +17,13 @@ const StyledDiv = styled.div`
 `
 
 class Person_Class extends Component {
+    constructor(props){
+        super(props);
+        this.input_element_ref=React.createRef();
+    }
   
     componentDidMount() {
-        this.input_element.focus();
+        this.input_element_ref.current.focus();
     }
     render() {
         return (
@@ -36,7 +40,7 @@ class Person_Class extends Component {
                         change my name:
 
                         <input
-                            ref={(inputEl) => { this.input_element = inputEl }}
+                            ref={this.input_element_ref}
                             onClick={(e) => { e.stopPropagation() }}
                             value={this.props.name}
                             onChange={this.props.input_change} type="text" />

@@ -17,6 +17,10 @@ const StyledDiv = styled.div`
 `
 
 class Person_Class extends Component {
+  
+    componentDidMount() {
+        this.input_element.focus();
+    }
     render() {
         return (
             <div>
@@ -31,7 +35,11 @@ class Person_Class extends Component {
                         <br />
                         change my name:
 
-                        <input onClick={(e) => { e.stopPropagation() }} value={this.props.name} onChange={this.props.input_change} type="text" />
+                        <input
+                            ref={(inputEl) => { this.input_element = inputEl }}
+                            onClick={(e) => { e.stopPropagation() }}
+                            value={this.props.name}
+                            onChange={this.props.input_change} type="text" />
                         <br />
                         {this.props.children}
                     </p>
@@ -41,9 +49,9 @@ class Person_Class extends Component {
     }
 }
 Person_Class.propTypes = {
-click:PropTypes.func,
-name:PropTypes.string,
-age:PropTypes.number,
-changed:PropTypes.func
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
 }
 export default Person_Class

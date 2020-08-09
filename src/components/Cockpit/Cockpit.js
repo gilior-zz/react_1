@@ -29,10 +29,13 @@ const Cockpit = (props) => {
             <button ref={btn_hi_ref} onClick={() => console.log('hi from button')}> hi from button</button>
             {
                 props.show_persons ?
-                    <Persons_Class toggle_persons={props.toggle_persons}
+                    <Persons_Class
+                        toggle_persons={props.toggle_persons}
                         on_name_change={(event, index) => props.on_name_change(event, index)}
                         on_remove_person={(index) => props.remove_person(index)}
-                        persons={props.persons}></Persons_Class> : null}
+                        persons={props.persons}>
+
+                    </Persons_Class> : null}
 
             <UserInput name={props.usernames[0]} on_user_name_change={props.update_user_name}></UserInput>
             <UserOutput name={props.usernames[0]}></UserOutput>

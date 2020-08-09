@@ -1,7 +1,7 @@
 import React, { Component, PureComponent } from "react";
 import Person from "./Person/Person";
 import Person_Class from "./Person/Person_class";
-
+import Auth_Context from '../../context/auth-context'
 class Persons_Class extends PureComponent {
 
     // static getDerivedStateFromProps(props, state) {
@@ -39,28 +39,38 @@ class Persons_Class extends PureComponent {
     render() {
         // return (
         //     <div>
-        return this.props.persons.map((item, index) => {
-            console.log('rendering persons');
+        console.log('[Persons.js] rendering...')
+        return (
 
-            return (
-                <Person_Class key={index}
 
-                    on_person_click={() => {
-                        this.props.on_remove_person(index)
-                    }}
-                    name={item.name}
-                    age={item.age}
-                    input_change={(event) => {
+            <Auth_Context.Consumer>
+                {
+                   (context)=> this.props.persons.map((item, index) => {
 
-                        this.props.on_name_change(event, index)
-                    }}>
-                    <mark>hello ya all</mark>
-                </Person_Class>
-            )
-        }
+                        return (
+                            <Person_Class key={index}
+
+                                on_person_click={() => {
+                                    this.props.on_remove_person(index)
+                                }}
+                                name={item.name}
+                                age={item.age}
+                                input_change={(event) => {
+
+                                    this.props.on_name_change(event, index)
+                                }}>
+                                <mark>hello ya all</mark>
+                            </Person_Class>
+                        )
+                    })
+                }
+
+
+
+            </Auth_Context.Consumer>
+
+
         )
-        {/* </div>
-        ) */}
     }
 }
 

@@ -5,6 +5,7 @@ import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 import Persons_Class from "../components/Persons/Persons_Class";
 import With_Class from '../hoc/With_Class'
+import Auth_Context from '../context/auth-context';
 class App_Class extends Component {
     state = {
         show_persons: true,
@@ -19,7 +20,8 @@ class App_Class extends Component {
             'b',
             'c'],
         show_cockpit: true,
-        click_number: 0
+        click_number: 0,
+        authenticated: false
     }
 
     constructor(props) {
@@ -107,6 +109,10 @@ class App_Class extends Component {
         ]
     }
 
+    loginHandler = () =>
+        this.setState({ authenticated: !this.state.authenticated });
+
+
 
     render() {
         let classes = [];
@@ -136,15 +142,20 @@ class App_Class extends Component {
                 <button onClick={this.toggle_persons}>show/hide persons</button>
                 <button onClick={() => { this.setState({ show_cockpit: !this.state.show_cockpit }) }}>show/hide cockpit</button>
 
-                {this.state.show_cockpit ?
-                    <Cockpit persons={this.state.persons} show_persons={this.state.show_persons} toggle_persons={this.toggle_persons}
-                        on_name_change={this.on_name_change}
-                        on_remove_person={this.remove_person}
-                        update_user_name={this.update_user_name} on_update_char_state={this.update_char_state}
-                        chars={this.state.char_state}
-                        on_remove_char={(index) => {
-                            this.remove_char(index)
-                        }} usernames={this.state.usernameState}></Cockpit> : null}
+                <Auth_Context.Provider value={{ 
+                    authenticated: this.state.authenticated, 
+                    login: this.loginHandler }}>
+                    {this.state.show_cockpit ?
+                        <Cockpit persons={this.state.persons} show_persons={this.state.show_persons} toggle_persons={this.toggle_persons}
+                            on_name_change={this.on_name_change}
+                            on_remove_person={this.remove_person}
+                            update_user_name={this.update_user_name} on_update_char_state={this.update_char_state}
+                            chars={this.state.char_state}
+                            on_remove_char={(index) => {
+                                this.remove_char(index)
+                            }} usernames={this.state.usernameState}></Cockpit> : null}
+                </Auth_Context.Provider>
+
             </With_Class>
 
         )

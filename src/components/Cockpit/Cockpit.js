@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import UserInput from "../task_1/UserInput";
 import UserOutput from "../task_1/UserOutput";
 import Validation from "../Validation/Validation";
 import Char from "../Char/Char";
 import Persons_Class from '../Persons/Persons_Class'
+import Auth_Context from '../../context/auth-context';
 const Cockpit = (props) => {
+    const auth_context = useContext(Auth_Context);
     const btn_hi_ref = useRef(null);
     useEffect(() => {
         btn_hi_ref.current.click();
@@ -26,6 +28,7 @@ const Cockpit = (props) => {
     const hi_frm_btn = () => console.log('hi from button')
     return (
         <div>
+            <button ref={btn_hi_ref} onClick={auth_context.login}>login </button>
             <button ref={btn_hi_ref} onClick={() => console.log('hi from button')}> hi from button</button>
             {
                 props.show_persons ?

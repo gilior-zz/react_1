@@ -17,6 +17,7 @@ const StyledDiv = styled.div`
 `
 
 class Person_Class extends Component {
+    static context=Auth_Context;
     constructor(props) {
         super(props);
         this.input_element_ref = React.createRef();
@@ -24,14 +25,16 @@ class Person_Class extends Component {
 
     componentDidMount() {
         this.input_element_ref.current.focus();
+        console.log(this.context.authenticated)
     }
     render() {
         return (
-            <Auth_Context.Consumer>
-                {(context)=><div>
+            // <Auth_Context.Consumer>
+                // {
+                    // (context)=><div>
                     <StyledDiv onClick={this.props.on_person_click}>
                         <p>
-                            {context.authenticated?'is authenticated':'is not authenticated'}
+                            {this.context.authenticated?'is authenticated':'is not authenticated'}
                         </p>
                         <p>
                             im a person!
@@ -52,8 +55,9 @@ class Person_Class extends Component {
                             {this.props.children}
                         </p>
                     </StyledDiv>
-                </div>}
-            </Auth_Context.Consumer>
+                // {/* </div> */}
+                // }
+            // </Auth_Context.Consumer>
 
         )
     }
